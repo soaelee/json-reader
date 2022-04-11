@@ -1,0 +1,89 @@
+body {
+  min-width: 320px;
+  line-height: normal;
+  color: #000;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body,
+input,
+button {
+  font-family: $font-default;
+  font-size: $font-size-md;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.hidden {
+  display: none !important;
+}
+
+ul,
+li {
+  list-style: none;
+}
+
+input,
+button {
+  -webkit-appearance: none;
+}
+
+button {
+  border: 0;
+  outline: 0;
+  background-color: transparent;
+  cursor: pointer;
+  &:disabled {
+    cursor: not-allowed;
+  }
+}
+
+input:disabled {
+  background-color: rgba(255, 255, 255, 0);
+  cursor: not-allowed;
+}
+
+input {
+  font-size: inherit;
+  border: 0;
+  &::placeholder {
+    color: rgb(99, 99, 99);
+    opacity: 1;
+  }
+  &:-ms-input-placeholder {
+    opacity: 1;
+  }
+  &[readonly],
+  &:disabled {
+    &::placeholder {
+      color: rgba(#000, 0.3);
+      opacity: 1;
+    }
+    &:-ms-input-placeholder {
+      color: rgba(#000, 0.3);
+      opacity: 1;
+    }
+  }
+  /* remove clear button */
+  &::-ms-clear,
+  &::-ms-reveal {
+    display: none;
+  }
+  &::-webkit-inner-spin-button,
+  &::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+  }
+}
+
+img {
+  vertical-align: top;
+}
