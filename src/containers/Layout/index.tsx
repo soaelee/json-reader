@@ -5,17 +5,13 @@ interface LayoutProps extends HtmlHTMLAttributes<HTMLDivElement> {
 }
 
 const Layout = (props: LayoutProps) => {
-  const {
-    title = `JSON-Reader ${props.title ?? ""}`,
-    children,
-    ...rest
-  } = props;
+  const { children, ...rest } = props;
   return (
     <div className="container" {...rest}>
-      <header className="header">{title}</header>
+      <header className="header">JSON READER</header>
       <div className="contents">{children}</div>
     </div>
   );
 };
 
-export default Layout;
+export default React.memo(Layout);

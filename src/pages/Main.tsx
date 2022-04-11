@@ -1,12 +1,13 @@
-import React from "react";
-import { Layout } from "containers";
+import { Content, Layout } from "containers";
 import { FileInput } from "components";
+import { useJson } from "hooks";
 
 const MainPage = () => {
+  const { state: json } = useJson();
   return (
     <Layout>
       <FileInput />
-      <span>데이터 있음</span>
+      <Content json={json} />
     </Layout>
   );
 };
