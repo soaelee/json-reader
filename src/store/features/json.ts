@@ -4,10 +4,14 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 const SLICE_NAME = "json";
 
 export interface TState {
-  [key: string]: any;
+  selected: string[];
+  data: { [key: string]: any };
 }
 
-const initialState: TState = {};
+const initialState: TState = {
+  selected: [],
+  data: {},
+};
 
 const jsonSlice = createSlice({
   name: SLICE_NAME,
@@ -17,17 +21,24 @@ const jsonSlice = createSlice({
       state: TState,
       { payload }: PayloadAction<{ [key: string]: any }>
     ) => {
-      return (state = payload);
+      state.data = payload;
+      return state;
     },
     resetAction: (state: TState) => {
-      return (state = {});
+      state = initialState;
+      return state;
+    },
+    selectKey: (state: TState, { payload }: PayloadAction<string[]>) => {
+      state.selected = payload;
+      return state;
     },
   },
 });
 
 // export reducer, actions
 const { reducer, actions } = jsonSlice;
-export const { parseAction, resetAction } = actions;
-export const jsonSelector = (state: RootState) => state.json;
+export const { parseAction, resetAction, selectKey } = actions;
+export const jsonSelector = (state: RootState) => state.json.data;
+export const keySelector = (state: RootState) => state.json.selected;
 
 export default reducer;

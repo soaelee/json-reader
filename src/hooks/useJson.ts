@@ -1,29 +1,35 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useCallback } from "react";
-import { jsonSelector, parseAction, resetAction } from "store/features/json";
+import {
+  jsonSelector,
+  keySelector,
+  parseAction,
+  resetAction,
+  selectKey,
+} from "store/features/json";
 import * as _ from "lodash";
 
 const useJson = () => {
-  const state = useSelector(jsonSelector);
   const dispatch = useDispatch();
+  const state = useSelector(jsonSelector);
+  const curKey = useSelector(keySelector);
 
   const onDeepMerge = (obj: { [key: string]: any }) => {
-    const answer = Object.keys(obj).reduce((acc, cur, idx) => {
+    const mergedObj = Object.keys(obj).reduce((acc, cur, idx) => {
       const value = obj[cur];
       let tmpObj = {};
       const splitKeys = cur.split(".");
       splitKeys.reverse().forEach((key, idx) => {
         tmpObj = { [key]: idx === 0 ? value : tmpObj };
       });
-      /* Deep merge
-       assign이나 spread 문법은 중복키일경우 덮어쓰게 됨 */
+      /* Deep merge : assign이나 spread 문법은 key가 중복일 경우, 덮어쓰게 됨 */
       return (acc = _.merge(acc, tmpObj));
     }, {});
-    return answer;
+    return mergedObj;
   };
+
   const onParse = useCallback(
     (json: string) => {
-      console.log(onDeepMerge(JSON.parse(json)));
       dispatch(parseAction(onDeepMerge(JSON.parse(json))));
     },
     [dispatch]
@@ -33,7 +39,33 @@ const useJson = () => {
     dispatch(resetAction);
   }, [dispatch]);
 
-  return { state, onParse, onReset };
+  const onMakeKeyMember = useCallback(
+    (key: string) => {
+      let copyState = { ...state };
+      for (let iKey of curKey) {
+        const iState = copyState[iKey];
+        if (typeof iState === "object" && key in iState) {
+          /* 다음 키가 같은 레벨일 경우, 데이터 교체 */
+          const nextIndex = curKey.indexOf(iKey) + 1;
+          if (curKey[nextIndex] in iState) {
+            return [...curKey.slice(0, nextIndex), key];
+          }
+          return [...curKey, key];
+        }
+        copyState = { ...iState };
+      }
+      return [key];
+    },
+    [state, curKey]
+  );
+
+  const onSelectKey = useCallback(
+    (key: string) => {
+      dispatch(selectKey(onMakeKeyMember(key)));
+    },
+    [dispatch, onMakeKeyMember]
+  );
+  return { state, curKey, onParse, onReset, onSelectKey };
 };
 
 export default useJson;

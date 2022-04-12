@@ -1,0 +1,13 @@
+#root {
+  min-height: 100vh;
+}
+
+.hide {
+  visibility: hidden;
+  height: 0;
+}
+
+.show {
+  visibility: visible;
+  height: auto;
+}

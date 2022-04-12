@@ -7,7 +7,9 @@ const MainPage = () => {
   return (
     <Layout>
       <FileInput />
-      <Content json={json} />
+      <main>
+        <Content json={json} />
+      </main>
     </Layout>
   );
 };
