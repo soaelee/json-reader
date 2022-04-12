@@ -13,8 +13,11 @@ const jsonSlice = createSlice({
   name: SLICE_NAME,
   initialState,
   reducers: {
-    parseAction: (state: TState, { payload }: PayloadAction<string>) => {
-      return (state = JSON.parse(payload));
+    parseAction: (
+      state: TState,
+      { payload }: PayloadAction<{ [key: string]: any }>
+    ) => {
+      return (state = payload);
     },
     resetAction: (state: TState) => {
       return (state = {});
