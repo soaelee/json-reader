@@ -1,5 +1,5 @@
-import { Content, Layout } from "containers";
-import { FileInput } from "components";
+import { Layout } from "containers";
+import { Content, FileInput } from "components";
 import { useJson } from "hooks";
 
 const MainPage = () => {

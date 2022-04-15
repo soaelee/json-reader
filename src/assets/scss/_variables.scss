@@ -1,12 +1,14 @@
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500&family=Roboto:wght@100;400;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500&family=Roboto:wght@100;400;700&display=swap');
 
-$main-color: #434343;
+// $main-color: rgb(255 109 106);
+$main-color: #ffc1e3;
+$second-color-dark-gray: #2a2a2a;
+$second-color-light-gray: #e4e2e2;
 
+$font-default: Pretendard-Regular, 'Noto Sans KR', sans-serif;
 $font-weight-bold: Pretendard-Bold;
 $font-weight-Regular: Pretendard-Regular;
 $font-weight-thin: Pretendard-Thin;
-
-$font-default: Pretendard-Regular, "Noto Sans KR", sans-serif;
 
 $font-size-sm: 0.875em;
 $font-size-md: 1em;

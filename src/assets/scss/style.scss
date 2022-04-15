@@ -1,7 +1,10 @@
-@import "./_variables";
+@import './_variables';
 
-@import "./base/_common";
-@import "./base/_font";
-@import "./base/_reset";
-@import "./base/_components";
-@import "./base/_mixin";
+@import './base/_font';
+@import './base/_reset';
+@import './base/_mixin';
+
+@import './base/_common';
+
+@import './base/_layout';
+@import './base/_components';

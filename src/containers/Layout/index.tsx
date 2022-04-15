@@ -1,4 +1,6 @@
-import React, { HtmlHTMLAttributes } from "react";
+import React, { HtmlHTMLAttributes } from 'react';
+import Footer from '../Footer';
+import Header from '../Header';
 
 interface LayoutProps extends HtmlHTMLAttributes<HTMLDivElement> {
   children?: React.ReactNode;
@@ -7,9 +9,10 @@ interface LayoutProps extends HtmlHTMLAttributes<HTMLDivElement> {
 const Layout = (props: LayoutProps) => {
   const { children, ...rest } = props;
   return (
-    <div className="container" {...rest}>
-      <header className="header">JSON READER</header>
-      <div className="contents">{children}</div>
+    <div className="main" {...rest}>
+      <Header />
+      <div className="container">{children}</div>
+      <Footer />
     </div>
   );
 };
