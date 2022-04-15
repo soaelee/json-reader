@@ -1,14 +1,13 @@
 import { useJson } from 'hooks';
-import React, { useCallback, useRef } from 'react';
+import React, { useCallback, useRef, ChangeEvent } from 'react';
 
 const FileInput = () => {
   const inputRef = useRef<HTMLInputElement>(null);
   const { onParse } = useJson();
 
   const onCheckFile = useCallback((files: FileList | null) => {
-    return (
-      files && ['text/javascript', 'application/json'].includes(files[0].type)
-    );
+    const _json = ['text/javascript', 'application/json'];
+    return files && _json.includes(files[0].type);
   }, []);
 
   const onResetFile = useCallback(() => {
@@ -18,7 +17,7 @@ const FileInput = () => {
   }, [inputRef]);
 
   const onUploadFile = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
+    (e: ChangeEvent<HTMLInputElement>) => {
       if (!onCheckFile(e.target.files)) {
         alert('json형식 파일을 첨부해주세요.');
         onResetFile();
@@ -31,6 +30,7 @@ const FileInput = () => {
         try {
           onParse(reader.target?.result as string);
         } catch (e) {
+          alert('파일을 다시 첨부해주세요.');
           onResetFile();
         }
       };
@@ -40,17 +40,17 @@ const FileInput = () => {
   );
 
   return (
-    <div>
-      <label htmlFor="file_input">
-        <button className="btn_primary">File</button>
-      </label>
+    <div className="upload-file">
       <input
         ref={inputRef}
         id="file_input"
         type="file"
         onChange={onUploadFile}
-        placeholder="JSON 파일을 첨부해주세요."
+        placeholder="JSON 파일을 첨부해주세요"
       />
+      <label htmlFor="file_input">
+        {inputRef.current?.value ? 'Reupload Json File' : 'Upload Json File'}
+      </label>
     </div>
   );
 };

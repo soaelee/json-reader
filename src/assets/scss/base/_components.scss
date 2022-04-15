@@ -1,9 +1,40 @@
-.hide {
-  visibility: hidden;
-  height: 0;
+/*FileInput*/
+// 속성값이 0일 경우, 일부 브라우저에서 요소가 제외될 수 있음
+.upload-file {
+  position: fixed;
+  bottom: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  input {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+    & + label {
+      @include font-weight($font-weight-bold);
+      cursor: pointer;
+      font-size: $font-size-md;
+      color: #fff;
+      background-color: $second-color-dark-gray;
+      padding: 15px 30px;
+      border-radius: $button-border-radius;
+      box-shadow: $box-shadow;
+      z-index: 3;
+      &:hover {
+        background-color: $second-color-dark-gray-2;
+      }
+    }
+  }
 }
 
-.show {
-  visibility: visible;
-  height: auto;
+/*Content*/
+.content {
+  @include layout-center(initial);
+  @include font-weight($font-weight-bold);
+  padding: 30px;
+  background-color: #e1e2e138;
+  border-radius: $border-radius;
 }
