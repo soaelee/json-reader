@@ -1,9 +1,7 @@
 import React, { HtmlHTMLAttributes } from 'react';
 import Header from '../Header';
 
-interface LayoutProps extends HtmlHTMLAttributes<HTMLDivElement> {
-  children?: React.ReactNode;
-}
+interface LayoutProps extends HtmlHTMLAttributes<HTMLDivElement> {}
 
 const Layout = (props: LayoutProps) => {
   const { children, ...rest } = props;

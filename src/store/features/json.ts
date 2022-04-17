@@ -1,38 +1,39 @@
-import { RootState } from "./../index";
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { RootState } from './../index';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-const SLICE_NAME = "json";
+const SLICE_NAME = 'json';
 
-export interface TState {
-  selected: string[];
-  data: { [key: string]: any };
+export interface JsonData {
+  [key: string]: any;
 }
 
-const initialState: TState = {
+export interface IState {
+  selected: string[];
+  data: JsonData;
+}
+
+const initialState: IState = {
   selected: [],
-  data: {},
+  data: {}
 };
 
 const jsonSlice = createSlice({
   name: SLICE_NAME,
   initialState,
   reducers: {
-    parseAction: (
-      state: TState,
-      { payload }: PayloadAction<{ [key: string]: any }>
-    ) => {
+    parseAction: (state: IState, { payload }: PayloadAction<JsonData>) => {
       state.data = payload;
       return state;
     },
-    resetAction: (state: TState) => {
+    resetAction: (state: IState) => {
       state = initialState;
       return state;
     },
-    selectKey: (state: TState, { payload }: PayloadAction<string[]>) => {
+    selectKey: (state: IState, { payload }: PayloadAction<string[]>) => {
       state.selected = payload;
       return state;
-    },
-  },
+    }
+  }
 });
 
 // export reducer, actions

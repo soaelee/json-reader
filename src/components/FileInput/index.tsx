@@ -1,9 +1,10 @@
-import { useJson } from 'hooks';
 import React, { useCallback, useRef, ChangeEvent } from 'react';
+import { useJson } from 'hooks';
+import Button from 'components/Button';
 
 const FileInput = () => {
   const inputRef = useRef<HTMLInputElement>(null);
-  const { onParse } = useJson();
+  const { onParse, onReset } = useJson();
 
   const onCheckFile = useCallback((files: FileList | null) => {
     const _json = ['text/javascript', 'application/json'];
@@ -13,8 +14,9 @@ const FileInput = () => {
   const onResetFile = useCallback(() => {
     if (inputRef.current) {
       inputRef.current.value = '';
+      onReset();
     }
-  }, [inputRef]);
+  }, [inputRef, onReset]);
 
   const onUploadFile = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
@@ -48,9 +50,16 @@ const FileInput = () => {
         onChange={onUploadFile}
         placeholder="JSON 파일을 첨부해주세요"
       />
-      <label htmlFor="file_input">
-        {inputRef.current?.value ? 'Reupload Json File' : 'Upload Json File'}
-      </label>
+      <div className="btn-wrap">
+        <label htmlFor="file_input">
+          {inputRef.current?.value ? 'Reupload Json File' : 'Upload Json File'}
+        </label>
+        {inputRef.current?.value && (
+          <Button className="primary" onClick={onResetFile}>
+            Reset
+          </Button>
+        )}
+      </div>
     </div>
   );
 };

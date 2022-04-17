@@ -1,3 +1,17 @@
+/*Button*/
+button {
+  @include font-weight($font-weight-bold);
+  cursor: pointer;
+  font-size: $font-size-md;
+  color: $main-color-dark;
+  padding: 13px 25px;
+  border-radius: $button-border-radius;
+  z-index: 2;
+  &:hover {
+    color: $main-color;
+  }
+}
+
 /*FileInput*/
 // 속성값이 0일 경우, 일부 브라우저에서 요소가 제외될 수 있음
 .upload-file {
@@ -13,18 +27,21 @@
     overflow: hidden;
     position: absolute;
     z-index: -1;
-    & + label {
-      @include font-weight($font-weight-bold);
-      cursor: pointer;
-      font-size: $font-size-md;
-      color: #fff;
-      background-color: $second-color-dark-gray;
-      padding: 15px 30px;
-      border-radius: $button-border-radius;
-      box-shadow: $box-shadow;
-      z-index: 3;
-      &:hover {
-        background-color: $second-color-dark-gray-2;
+    & + .btn-wrap {
+      display: flex;
+      label {
+        @include font-weight($font-weight-bold);
+        cursor: pointer;
+        font-size: $font-size-md;
+        color: #fff;
+        background-color: $second-color-dark-gray;
+        padding: 15px 30px;
+        border-radius: $button-border-radius;
+        box-shadow: $box-shadow;
+        z-index: 2;
+        &:hover {
+          background-color: $second-color-dark-gray-2;
+        }
       }
     }
   }
